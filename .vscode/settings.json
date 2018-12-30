@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "D:\\Anaconda3\\python.exe",
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true
+    },
+    "python.linting.pylintArgs": ["--load-plugins", "pylint_flask"]
+}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="row"> 
+    <div class="col-md-8"> 
+        <h2>
+            {{post.title}}
+        </h2>
+        <p><span class="glyphicon glyphicon-time"></span> 
+            Posted on {{ moment(post.timestamp).format('LLL') }}
+        </p>
+        <hr>
+        <p>{{ post.content | markdown | safe}}</p>
+
+        <hr>
+    </div>
+</div>
+{% endblock %}
+    
