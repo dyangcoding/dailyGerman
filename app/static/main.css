@@ -78,3 +78,15 @@ body {
   .account-heading {
     font-size: 2.5rem;
   }
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+  

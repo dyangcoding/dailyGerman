@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block app_content %}
-    <div class="row">
+    <div class="row wrapper">
       <div class="col-md-8">
           {% for post in posts %}
             {% include '_post.html' %}
@@ -16,6 +16,30 @@
               </li>
           </ul>
       </div>
+
+      <div class="col-md-4 position-top">
+          <div class="well">
+              <h4>Blog Categories</h4>
+              <div class="row">
+                  <div class="col-lg-6">
+                      <ul class="list-unstyled">
+                              <li><a href="#">All</a>
+                              </li>
+                              <li><a href="#">Daily German 100</a>
+                              </li>
+                              <li><a href="#">Interview</a>
+                              </li>
+                              <li><a href="#">Film</a>
+                              </li>
+                              <li><a href="#">Song</a>
+                              </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
     </div>
     
 {% endblock app_content %}

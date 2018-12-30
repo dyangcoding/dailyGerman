@@ -2,12 +2,12 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Want to get in touch?
+    <p>Want to get in touch?
         Fill out the form below to send me a message and I will get back 
         to you as soon as possible!
-    </h1>
+    </p>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-8 col-md-10 mx-auto">
             {{ wtf.quick_form(form) }}
         </div>
     </div>

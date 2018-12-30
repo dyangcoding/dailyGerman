@@ -44,35 +44,10 @@
             {% endfor %}
         {% endif %}
         {% endwith %}
-
-        <div class="float-right">
-            <!-- Blog Categories Well -->
-            <div class="well">
-                <h4>Blog Categories</h4>
-                <div>
-                    <div>
-                        <ul class="list-unstyled">
-                            <li><a href="#">All</a>
-                            </li>
-                            <li><a href="#">Daily German 100</a>
-                            </li>
-                            <li><a href="#">Interview</a>
-                            </li>
-                            <li><a href="#">Film</a>
-                            </li>
-                            <li><a href="#">Song</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-        </div>
+        
         {# application content needs to be provided in the app_content block #}
         {% block app_content %}
         {% endblock %}
-    </div>
-    <div id="push">
     </div>
     
     {% block footer %}
