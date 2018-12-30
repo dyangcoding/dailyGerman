@@ -1,0 +1,6 @@
+# virtual env
+venv/
+
+# cache file
+__pycache__
+app/__pycache__/

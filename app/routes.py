@@ -1,5 +1,5 @@
 from flask import Flask, render_template, url_for, redirect, flash
-from app.dash.forms import LoginForm, UploadForm, RegistrationForm
+from app.dash.forms import LoginForm, ContactForm, UploadForm, RegistrationForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User, Post
@@ -7,16 +7,23 @@ from app.dash.forms import ResetPasswordRequestForm, ResetPasswordForm
 from app.email import send_password_reset_email
 from app import app, db
 
-@app.route("/")
-@app.route("/home")
+@app.route('/')
+@app.route('/home')
 def home():
     posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
-@app.route("/about")
+@app.route('/about')
 def about():
     return render_template('about.html', title='About')
 
+@app.route('/contact')
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        pass
+    return render_template('contact.html', title='Contact', form=form)
+    
 @app.route('/dash/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:

@@ -22,7 +22,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
         
     @login.user_loader
-    def load_user(self, id):
+    def load_user(id):
         return User.query.get(int(id))
 
     def get_reset_password_token(self, expires_in=600):
