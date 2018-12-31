@@ -1,30 +1,36 @@
 from flask import Flask, render_template, url_for, redirect, flash
-from app.dash.forms import LoginForm, ContactForm, UploadForm, RegistrationForm
+from app.admin import LoginForm, UploadForm, RegistrationForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User, Post
-from app.dash.forms import ResetPasswordRequestForm, ResetPasswordForm
+from app.admin import ResetPasswordRequestForm, ResetPasswordForm
+from app.main.forms import ContactForm
 from app.email import send_password_reset_email
-from app import app, db
+from app import db
+from app.main import bp
 
-@app.route('/')
-@app.route('/home')
+@bp.route('/')
+@bp.route('/home')
 def home():
     posts = Post.query.all()
     return render_template('home.html', posts=posts)
 
-@app.route('/about')
+@bp.route('/about')
 def about():
     return render_template('about.html', title='About')
 
-@app.route('/contact')
+@bp.route('/contact')
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
         pass
     return render_template('contact.html', title='Contact', form=form)
-    
-@app.route('/dash/login', methods=['GET', 'POST'])
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+@bp.route('/dash/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('dash'))        
@@ -38,12 +44,12 @@ def login():
         return redirect(url_for('dash'))
     return render_template('login.html', title='Sign In', form=form)
 
-@app.route('/logout')
+@bp.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/register', methods=['GET', 'POST'])
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('dash'))
@@ -57,7 +63,7 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/dash', methods= ['GET', 'POST'])
+@bp.route('/dash', methods= ['GET', 'POST'])
 @login_required
 def dash():
     form = UploadForm()
@@ -69,7 +75,7 @@ def dash():
         return redirect(url_for('home'))
     return render_template('dashboard.html', title='Dashboard', form=form)
 
-@app.route('/reset_password_request', methods=['GET', 'POST'])
+@bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -83,7 +89,7 @@ def reset_password_request():
     return render_template('reset_password_request.html',
                            title='Reset Password', form=form)
 
-@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -98,7 +104,7 @@ def reset_password(token):
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
 
-@app.route('/<int:post_id>/detail')
+@bp.route('/<int:post_id>/detail')
 def detail(post_id):
     post = Post.query.get(post_id)
     if post is None:
@@ -106,17 +112,17 @@ def detail(post_id):
         return redirect(url_for('home'))
     return render_template('post_detail.html', post=post)
 
-@app.route('/posts/interview')
+@bp.route('/posts/interview')
 def show_interview_posts():
     posts = Post.query.filter_by(Post.categorie=='Interview').all()
     return render_template('interview_posts.html', posts=posts)
 
-@app.route('/posts/dailyGerman')
+@bp.route('/posts/dailyGerman')
 def show_daily_posts():
     posts = Post.query.filter_by(Post.categorie=='Daily German 100').all()
     return render_template('dailyGerman_posts.html', posts=posts)
 
-@app.route('/posts/film')
+@bp.route('/posts/film')
 def show_film_posts():
     posts = Post.query.filter_by(Post.categorie=='Film').all()
     return render_template('film_posts.html', posts=posts)

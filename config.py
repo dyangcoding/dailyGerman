@@ -16,3 +16,4 @@ class Config(object):
     ADMINS = ['dailygerman9527@gmail.com']
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
+    FLASK_ADMIN_SWATCH = 'cerulean'
