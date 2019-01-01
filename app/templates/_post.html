@@ -1,5 +1,5 @@
 <h2>
-    <a href="{{ url_for('detail', post_id=post.id) }}">{{post.title}}</a>
+    <a href="{{ url_for('main.detail', post_id=post.id) }}">{{post.title}}</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span> 
     Posted by Daily German on {{ moment(post.timestamp).format('LLL') }}
@@ -7,8 +7,8 @@
 <hr>
     <img class="img-responsive" src="http://placehold.it/900x300" alt="">
 <hr>
-<p>{{ post.content | markdown | safe}}</p>
-<a class="btn btn-primary" href="{{ url_for('detail', post_id=post.id) }}">
+<p>{{ post.content | safe}}</p>
+<a class="btn btn-primary" href="{{ url_for('main.detail', post_id=post.id) }}">
     Read More <span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 

@@ -1,10 +1,8 @@
 from app import create_app
+from app.models import db
+from app.models import User, Post
 
 app = create_app()
-
-# be able to import db after create the instance of db
-from app import db
-from app.models import User, Post
 
 @app.shell_context_processor
 def make_shell_context():

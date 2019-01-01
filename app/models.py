@@ -3,10 +3,9 @@ from datetime import datetime
 from time import time
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from flask_sqlalchemy import SQLAlchemy
 from flask import current_app
+from app import login, db
 
-db = SQLAlchemy()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -37,6 +36,10 @@ class User(UserMixin, db.Model):
         except:
             return
         return User.query.get(id)
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,16 +1,12 @@
 from flask import render_template, url_for, redirect, flash
-from app.admin.forms import LoginForm, UploadForm, RegistrationForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User, Post
-from app.admin.forms import ResetPasswordRequestForm, ResetPasswordForm
-from app.admin import bp
-from app.admin.email import send_password_reset_email
+from . import bp
+from .forms import LoginForm, UploadForm, RegistrationForm
+from .forms import ResetPasswordRequestForm, ResetPasswordForm
+from .email import send_password_reset_email
 from app.models import db
-
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
 
 @bp.route('/dash/login', methods=['GET', 'POST'])
 def login():

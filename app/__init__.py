@@ -2,6 +2,7 @@ import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_moment import Moment
@@ -11,9 +12,9 @@ from flask_misaka import Misaka
 from flask_admin import Admin, BaseView, expose
 from flask_admin.contrib.sqla import ModelView
 from config import Config
-from app.models import User, Post
 
 migrate = Migrate()
+db = SQLAlchemy()
 admin = Admin()
 login = LoginManager()
 login.session_protection = 'strong'
@@ -33,8 +34,8 @@ def init_extension(app):
         bootstrap,
         moment
     )
-    for e in extensions:
-        e.init_app(app)
+    for extension in extensions:
+        extension.init_app(app)
     SimpleMDE()
     Misaka()
 
@@ -49,8 +50,24 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    init_extension(app)
-    init_blueprint(app)
+    #init_extension(app)
+    #init_blueprint(app)
+
+    migrate.init_app(app)
+    db.init_app(app)
+    admin.init_app(app)
+    login.init_app(app)
+    mail.init_app(app)
+    bootstrap.init_app(app)
+    moment.init_app(app)
+    SimpleMDE()
+    Misaka()
+
+    from app.main import bp as main_bp
+    app.register_blueprint(main_bp)
+
+    #from app.admin import bp as admin_bp
+    #app.register_blueprint(admin_bp)
 
     if not app.debug:
         if app.config['MAIL_SERVER']:
@@ -82,4 +99,4 @@ def create_app(config_class=Config):
 
     return app
 
-#from app import routes, models
+from app import models
