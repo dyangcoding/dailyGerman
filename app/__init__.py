@@ -1,7 +1,6 @@
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -14,39 +13,45 @@ from flask_admin.contrib.sqla import ModelView
 from config import Config
 from app.models import User, Post
 
-db = SQLAlchemy()
 migrate = Migrate()
 admin = Admin()
-#admin.add_view(AdminIndexView(name='Create'))
 login = LoginManager()
+login.session_protection = 'strong'
+login.login_view = 'login'
 mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
-SimpleMDE()
-Misaka()
 
-def create_app(config_class=Config):
-    app = Flask(__name__)
-    app.config.from_object(Config)
+def init_extension(app):
+    from app.models import db
+    extensions = (
+        migrate,
+        db,
+        admin,
+        login,
+        mail,
+        bootstrap,
+        moment
+    )
+    for e in extensions:
+        e.init_app(app)
+    SimpleMDE()
+    Misaka()
 
-    db.init_app(app)
-    migrate.init_app(app)
-    admin.init_app(app)
-    admin.add_view(ModelView(User, db.session))
-    admin.add_view(ModelView(Post, db.session))
-    login.init_app(app)
-    login.session_protection = 'strong'
-    login.login_view = 'login'
-    mail.init_app(app)
-    bootstrap.init_app(app)
-    moment.init_app(app)
-
+def init_blueprint(app):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
     from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp)
-    
+
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(Config)
+
+    init_extension(app)
+    init_blueprint(app)
+
     if not app.debug:
         if app.config['MAIL_SERVER']:
             auth = None
@@ -58,7 +63,7 @@ def create_app(config_class=Config):
             mail_handler = SMTPHandler(
                 mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                 fromaddr='no-reply@' + app.config['MAIL_SERVER'],
-                toaddrs=app.config['ADMINS'], subject='Microblog Failure',
+                toaddrs=app.config['ADMINS'], subject='DailyGerman Failure',
                 credentials=auth, secure=secure)
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
@@ -73,8 +78,8 @@ def create_app(config_class=Config):
     app.logger.addHandler(file_handler)
 
     app.logger.setLevel(logging.INFO)
-    app.logger.info('Microblog startup')
+    app.logger.info('DailyGerman startup')
 
     return app
 
-from app import routes, models
+#from app import routes, models
