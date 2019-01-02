@@ -1,17 +1,18 @@
 import logging, os
 from logging.handlers import SMTPHandler, RotatingFileHandler
-from flask import Flask
+from flask import Flask, render_template, url_for, redirect, flash
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
-from flask_admin import Admin, BaseView, expose
+from flask_admin import Admin, BaseView, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from config import Config
+from .forms import LoginForm
 
 migrate = Migrate()
 db = SQLAlchemy()
@@ -23,6 +24,46 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 
+class DGAdminIndexView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        if not current_user.is_authenticated:
+            return redirect(url_for('.login'))
+        return super(DGAdminIndexView, self).index()
+
+    @expose('/login', methods=['GET', 'POST'])
+    def login(self):
+        form = LoginForm()
+        if helpers.validate_form_on_submit(form):
+            from .models import User
+            user = User.query.filter_by(username=form.username.data).first()
+            if user is None or not user.check_password(form.password.data):
+                flash('Invalid username or password')
+                return redirect(url_for('.login'))
+            login_user(user, remember=form.remember_me.data)
+            return redirect(url_for('.index'))
+        return render_template('login.html', form=form)
+
+    @expose('/logout')
+    @login_required
+    def logout(self):
+        logout_user()
+        return redirect(url_for('.login'))
+
+class UserModeView(ModelView):
+    def is_accessible(self):
+        if (not current_user.is_active or not
+                current_user.is_authenticated):
+            return False
+        return True 
+
+class PostModeView(ModelView):
+    def is_accessible(self):
+        if (not current_user.is_active or not
+                current_user.is_authenticated):
+            return False
+        return True
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -31,9 +72,9 @@ def create_app(config_class=Config):
     db.init_app(app)
     from .models import User
     from .models import Post
-    admin.init_app(app)
-    admin.add_view(ModelView(User, db.session))
-    admin.add_view(ModelView(Post, db.session))
+    admin.init_app(app, index_view=DGAdminIndexView())
+    admin.add_view(UserModeView(User, db.session))
+    admin.add_view(PostModeView(Post, db.session))
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
