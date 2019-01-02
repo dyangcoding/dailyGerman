@@ -30,15 +30,20 @@ def detail(post_id):
 
 @bp.route('/posts/interview')
 def interview():
-    posts = Post.query.filter_by(Post.categorie=='Interview').all()
-    return render_template('interview_posts.html', posts=posts)
+    posts = Post.query.filter_by(categorie='Interview').all()
+    return render_template('home.html', posts=posts)
 
 @bp.route('/posts/dailyGerman')
 def dailyGerman():
-    posts = Post.query.filter_by(Post.categorie=='Daily German 100').all()
-    return render_template('dailyGerman_posts.html', posts=posts)
+    posts = Post.query.filter_by(categorie='German 100').all()
+    return render_template('home.html', posts=posts)
 
 @bp.route('/posts/film')
 def film():
-    posts = Post.query.filter_by(Post.categorie=='Film').all()
-    return render_template('film_posts.html', posts=posts)
+    posts = Post.query.filter_by(categorie='Film').all()
+    return render_template('home.html', posts=posts)
+
+@bp.route('/posts/song')
+def song():
+    posts = Post.query.filter_by(categorie='Song').all()
+    return render_template('home.html', posts=posts)

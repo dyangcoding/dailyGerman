@@ -23,51 +23,29 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 
-def init_extension(app):
-    from app.models import db
-    extensions = (
-        migrate,
-        db,
-        admin,
-        login,
-        mail,
-        bootstrap,
-        moment
-    )
-    for extension in extensions:
-        extension.init_app(app)
-    SimpleMDE()
-    Misaka()
-
-def init_blueprint(app):
-    from app.main import bp as main_bp
-    app.register_blueprint(main_bp)
-
-    from app.admin import bp as admin_bp
-    app.register_blueprint(admin_bp)
-
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    #init_extension(app)
-    #init_blueprint(app)
-
     migrate.init_app(app)
     db.init_app(app)
+    from .models import User
+    from .models import Post
     admin.init_app(app)
+    admin.add_view(ModelView(User, db.session))
+    admin.add_view(ModelView(Post, db.session))
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
-    SimpleMDE()
-    Misaka()
+    SimpleMDE(app)
+    Misaka(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
-    #from app.admin import bp as admin_bp
-    #app.register_blueprint(admin_bp)
+    """ from app.admin import bp as admin_bp
+    app.register_blueprint(admin_bp, url_prefix='/admin') """
 
     if not app.debug:
         if app.config['MAIL_SERVER']:
@@ -85,17 +63,17 @@ def create_app(config_class=Config):
             mail_handler.setLevel(logging.ERROR)
             app.logger.addHandler(mail_handler)
 
-    if not os.path.exists('logs'):
-        os.mkdir('logs')
-    file_handler = RotatingFileHandler('logs/dailyGerman.log', maxBytes=10240,
-                                        backupCount=10)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
-    file_handler.setLevel(logging.INFO)
-    app.logger.addHandler(file_handler)
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        file_handler = RotatingFileHandler('logs/dailyGerman.log', maxBytes=10240,
+                                            backupCount=10)
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
 
-    app.logger.setLevel(logging.INFO)
-    app.logger.info('DailyGerman startup')
+        app.logger.setLevel(logging.INFO)
+        app.logger.info('DailyGerman startup')
 
     return app
 
