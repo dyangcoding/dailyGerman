@@ -67,10 +67,9 @@ class PostModeView(ModelView):
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
-
-    migrate.init_app(app)
-    with app.app_context():
-        db.init_app(app)
+    
+    db.init_app(app)
+    migrate.init_app(app, db)
     from .models import User
     from .models import Post
     admin.init_app(app, index_view=DGAdminIndexView())
@@ -89,6 +88,9 @@ def create_app(config_class=Config):
     """ from app.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix='/admin') """
 
+    from app.errors import bp as error_bp
+    app.register_blueprint(error_bp)
+    
     if not app.debug:
         if app.config['MAIL_SERVER']:
             auth = None
