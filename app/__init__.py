@@ -13,6 +13,7 @@ from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from config import Config
 from .forms import LoginForm
+from flaskext.mysql import MySQL
 
 migrate = Migrate()
 db = SQLAlchemy()
@@ -69,7 +70,8 @@ def create_app(config_class=Config):
     app.config.from_object(Config)
 
     migrate.init_app(app)
-    db.init_app(app)
+    with app.app_context:
+        db.init_app(app)
     from .models import User
     from .models import Post
     admin.init_app(app, index_view=DGAdminIndexView())
