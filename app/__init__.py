@@ -9,7 +9,7 @@ from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
-from flask_admin import Admin, BaseView, expose, AdminIndexView, helpers
+from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from config import Config
 from .forms import LoginForm
