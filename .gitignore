@@ -12,8 +12,8 @@ __pycache__
 #logs
 logs
 
-#database
-app.db
-
 # pylint
 pylintrc
+
+#config file
+.env
