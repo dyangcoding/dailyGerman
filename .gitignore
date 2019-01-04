@@ -1,6 +1,9 @@
 # virtual env
 venv/
 
+#migrations
+migrations/
+
 # cache file
 *.pyc
 __pycache__
@@ -11,3 +14,6 @@ logs
 
 #database
 app.db
+
+# pylint
+pylintrc
