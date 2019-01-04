@@ -9,7 +9,7 @@ class Config(object):
     or 'k\x80\xec\xb5\xb6\x87d\x19\x96%\r]\x189\xff\xe5\xd36\xa8\x15Gk\x947'
     SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(
     username="fabian082",
-    password="a15803449527",
+    password="diesenweg9527",
     hostname="fabian082.mysql.pythonanywhere-services.com",
     databasename="fabian082$dailyGermanDB",
     )
