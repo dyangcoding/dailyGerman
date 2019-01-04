@@ -20,6 +20,8 @@ def contact():
     if form.validate_on_submit():
         send_email(form.subject.data, form.email.data, \
                     current_app.config['ADMINS'][0], form.message.data)
+        flash('your request will be answered as soon as possiable.')
+        return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
 
 @bp.route('/<int:post_id>/detail')
@@ -27,7 +29,7 @@ def detail(post_id):
     post = Post.query.get(post_id)
     if post is None:
         flash('The Artikel has been removed.')
-        return redirect(url_for('home'))
+        return redirect(url_for('.home'))
     return render_template('post_detail.html', post=post)
 
 @bp.route('/posts/interview')
