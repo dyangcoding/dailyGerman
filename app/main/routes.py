@@ -1,7 +1,8 @@
-from flask import Flask, render_template, url_for, redirect, flash
+from flask import Flask, render_template, url_for, redirect, flash, current_app
 from app.models import Post
 from app.main.forms import ContactForm
 from app.main import bp
+from app.email import send_email
 
 @bp.route('/')
 @bp.route('/home')
@@ -17,7 +18,8 @@ def about():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
-        pass
+        send_email(form.subject.data, form.email.data, \
+                    current_app.config['ADMINS'][0], form.message.data)
     return render_template('contact.html', title='Contact', form=form)
 
 @bp.route('/<int:post_id>/detail')
