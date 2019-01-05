@@ -14,7 +14,7 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-@bp.route('/contact')
+@bp.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
