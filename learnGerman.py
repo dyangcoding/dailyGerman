@@ -27,7 +27,8 @@ def create_admin():
         db.session.commit()
         print('User admin added.')
 
-create_admin()
+# uncomment this line after create admin user
+#create_admin()
 
 @app.shell_context_processor
 def make_shell_context():
