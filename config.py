@@ -16,9 +16,12 @@ class Config(object):
     SQLALCHEMY_POOL_RECYCLE = 299
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
+    MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
+    MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS') is not None
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     ADMINS = ['dailygerman9527@gmail.com']
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
     FLASK_ADMIN_SWATCH = 'cerulean'
+    MAIL_SUPPRESS_SEND = False
