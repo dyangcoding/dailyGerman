@@ -14,6 +14,7 @@ def create_admin():
 
         print('Enter username: ')
         username = input()
+        print('Enter email: ')
         email = input()
         password = getpass()
         assert password == getpass('Password (again):')
