@@ -12,14 +12,14 @@ def create_admin():
         if User.query.all():
             return
 
-        print('Enter username: ') 
+        print('Enter username: ')
         username = input()
         password = getpass()
         assert password == getpass('Password (again):')
 
         user = User(
-            username=username, 
-            password=generate_password_hash(password))
+            username=username,
+            password_hash=generate_password_hash(password))
         db.session.add(user)
         db.session.commit()
         print('User admin added.')
