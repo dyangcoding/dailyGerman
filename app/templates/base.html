@@ -7,6 +7,8 @@
 
 {% block styles %}
     {{ super() }}
+    <!-- Custom sticky footer stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='footer.css')}}" />
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Passion+One:900" rel="stylesheet">
@@ -52,21 +54,16 @@
     </div>
     
     {% block footer %}
-    
-      <div class="footer footer_sticky">
-        <div class="container">
-          <div class="row">
-            <div class="text-center">
-              <hr>
-              <p>Copyright &copy; Daily German 2019 All Rights Reserved.</p>
+        <footer class="footer">
+            <div class="container">
+                <div class="row text-center">
+                    <span class="text-muted">&copy; Daily German 2019 All Rights Reserved.</span>
+                </div>
             </div>
-          </div> <!-- row -->
-        </div> <!-- containter -->
-      </div> <!-- footer -->
-    
+        </footer>
     {% endblock %}
-{% endblock %}
 
+{% endblock %}
 
 {% block scripts %}
     {{ super() }}
