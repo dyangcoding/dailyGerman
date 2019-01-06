@@ -108,3 +108,13 @@
     }
   }
   
+  .content_sticky {
+    min-height: calc(100vh - 70px);
+  }
+  
+  .footer_sticky {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+  }
