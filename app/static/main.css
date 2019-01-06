@@ -107,4 +107,11 @@
       padding-right: 15px;
     }
   }
+
+  .content_sticky {
+    min-height: calc(100vh - 70px);
+  }
+  .footer_sticky {
+    height: 50px;
+  }
   
