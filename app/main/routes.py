@@ -13,7 +13,8 @@ def home():
 @bp.route('/about')
 def about():
     about = Post.query.filter_by(categorie='About').first()
-    return render_template('about.html', title='About', text=about.content)
+    text = 'Oops, noch kein Inhalt hier !' if about is None else about.content
+    return render_template('about.html', title='About', text=text)
 
 @bp.route('/contact', methods=['GET', 'POST'])
 def contact():
