@@ -1,39 +1,6 @@
 {% extends "base.html" %}
 {% block app_content %}
-    <header class="masthead" style="background-image: url('http://placehold.it/900x300')">
-        <div class="overlay"></div>
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="page-heading">
-                <h1>About Me</h1>
-                <span class="subheading">This is what I do.</span>
-            </div>
-            </div>
-        </div>
-        </div>
-    </header>
-
     <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            {% filter markdown %}
-            <p># willkommen auf DailyGerman
-
-            geboren in China und lebt seit 7 Jahre in Deutschland. Einer der Grund, warum ich mich damals entschieden habe, einen Aufenhalt in Ausland zu wagen, ist, dass ich gerne Fremdsprache lerne.
-            
-            > lerne gerne Deutsch, immer wieder.
-            
-            Das Ziel dieses Blog dient dazu, Erfahrungen bzw. Anregungen beim Deutschlernen auszutauschen. 
-            
-            > Was mich beim Sprachenlernen am meistens stört, ist, wenn man die Sprache nicht mehr spricht, nicht mehr schreibt, oder was auch immer, vergisst man schnell alles wieder.
-            
-            To be continue...
-            </p>
-            {% endfilter %}
-        </div>
-        </div>
-    </div>
+    {{text | markdown }}
 
 {% endblock %}

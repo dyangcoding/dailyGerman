@@ -7,12 +7,13 @@ from app.email import send_email
 @bp.route('/')
 @bp.route('/home')
 def home():
-    posts = Post.query.all()
+    posts = Post.query.filter(Post.categorie != 'About').all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/about')
 def about():
-    return render_template('about.html', title='About')
+    about = Post.query.filter_by(categorie='About').first()
+    return render_template('about.html', title='About', text=about.content)
 
 @bp.route('/contact', methods=['GET', 'POST'])
 def contact():
