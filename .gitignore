@@ -11,3 +11,6 @@ app.db
 
 #config file
 .env
+
+# database migration folder
+migrations/

@@ -23,6 +23,7 @@ login.login_view = 'login'
 mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
+md = Misaka()
 
 class DGAdminIndexView(AdminIndexView):
     @expose('/')
@@ -80,13 +81,10 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     SimpleMDE(app)
-    Misaka(app)
+    md.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
-
-    """ from app.admin import bp as admin_bp
-    app.register_blueprint(admin_bp, url_prefix='/admin') """
 
     from app.errors import bp as error_bp
     app.register_blueprint(error_bp)
