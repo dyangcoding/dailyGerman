@@ -17,3 +17,6 @@ pylintrc
 
 #config file
 .env
+
+# local test database
+app.db
