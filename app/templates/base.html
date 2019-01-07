@@ -2,13 +2,13 @@
 {% include 'header.html' %}
 
 {% block title %}
-    {% if title %}{{ title }} - Daily German{% else %}Welcome to Daily German{% endif %}
+    {% if title %}{{ title }} - Daily German{% else %}Daily German{% endif %}
 {% endblock %}
 
 {% block styles %}
     {{ super() }}
     <!-- Custom sticky footer stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='footer.css')}}" />
+	<link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/footer.css')}}" />
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Passion+One:900" rel="stylesheet">
