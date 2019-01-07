@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block app_content %}
     <!-- Main Content -->
-    {{text | markdown }}
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-md-offset-2">
+            {{text | markdown }}
+        </div>
+    </div>
 {% endblock %}
