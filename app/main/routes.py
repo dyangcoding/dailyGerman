@@ -20,8 +20,10 @@ def about():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
-        send_email(form.subject.data, form.email.data, \
-                    current_app.config['ADMINS'][0], form.message.data)
+        subject = form.subject.data if form.subject is not None else ''
+        message_from = 'got message {} from {}'.format(form.message.data, form.email.data)
+        send_email(subject, current_app.config['ADMINS'][0], \
+                    current_app.config['ADMINS'][0], message_from)
         flash('your request will be answered as soon as possiable.')
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
