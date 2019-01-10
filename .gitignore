@@ -14,3 +14,9 @@ app.db
 
 # database migration folder
 migrations/
+
+# logs
+logs/
+
+#vs code settings
+.vscode/

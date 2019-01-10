@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, flash, current_app
+from flask import render_template, url_for, redirect, flash, current_app
 from app.models import Post
 from app.main.forms import ContactForm
 from app.main import bp
@@ -19,8 +19,10 @@ def about():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
-        send_email(form.subject.data, form.email.data, \
-                    current_app.config['ADMINS'][0], form.message.data)
+        subject = form.subject.data if form.subject is not None else ''
+        message_from = 'message: {} from {}'.format(form.message.data, form.email.data)
+        send_email(subject, current_app.config['ADMINS'][0], \
+                    current_app.config['ADMINS'], message_from)
         flash('your request will be answered as soon as possiable.')
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
