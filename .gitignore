@@ -10,7 +10,7 @@ __pycache__
 **/__pycache__
 
 #logs
-logs
+logs/
 
 # pylint
 pylintrc
@@ -20,3 +20,6 @@ pylintrc
 
 # local test database
 app.db
+
+# vs code settings
+.vscode/
