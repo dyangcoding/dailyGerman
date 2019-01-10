@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, redirect, flash, current_app
 from app.models import Post
 from app.main.forms import ContactForm
 from app.main import bp
-from app.email import send_email
+from app.email import send_email, send_mail_yag
 
 @bp.route('/')
 @bp.route('/home')
@@ -22,8 +22,9 @@ def contact():
     if form.validate_on_submit():
         subject = form.subject.data if form.subject is not None else ''
         message_from = 'message: {} from {}'.format(form.message.data, form.email.data)
-        send_email(subject, current_app.config['ADMINS'][0], \
-                    current_app.config['ADMINS'], message_from)
+        """ send_email(subject, current_app.config['ADMINS'][0], \
+                    current_app.config['ADMINS'], message_from) """
+        send_email_yag(subject, message_from)
         flash('your request will be answered as soon as possiable.')
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
