@@ -56,7 +56,7 @@ class UserModeView(ModelView):
         if (not current_user.is_active or not
                 current_user.is_authenticated):
             return False
-        return True 
+        return True
 
 class PostModeView(ModelView):
     def is_accessible(self):
@@ -68,7 +68,7 @@ class PostModeView(ModelView):
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
-    
+
     db.init_app(app)
     migrate.init_app(app, db)
     from .models import User
@@ -88,13 +88,12 @@ def create_app(config_class=Config):
 
     from app.errors import bp as error_bp
     app.register_blueprint(error_bp)
-    
+
     if not app.debug:
         if app.config['MAIL_SERVER']:
             auth = None
             if app.config['MAIL_USERNAME'] or app.config['MAIL_PASSWORD']:
                 auth = (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD'])
-            secure = None
             mail_handler = SMTPHandler(
                 mailhost=(app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
                 fromaddr='no-reply@' + app.config['MAIL_SERVER'],
