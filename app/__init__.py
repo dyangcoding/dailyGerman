@@ -65,6 +65,13 @@ class PostModeView(ModelView):
             return False
         return True
 
+class MessageModeView(ModelView):
+    def is_accessible(self):
+        if (not current_user.is_active or not
+                current_user.is_authenticated):
+            return False
+        return True
+
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -73,9 +80,11 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     from .models import User
     from .models import Post
+    from .models import Message
     admin.init_app(app, index_view=DGAdminIndexView())
     admin.add_view(UserModeView(User, db.session))
     admin.add_view(PostModeView(Post, db.session))
+    admin.add_view(MessageModeView(Message, db.session))
     login.init_app(app)
     mail.init_app(app)
     bootstrap.init_app(app)

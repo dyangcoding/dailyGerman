@@ -51,3 +51,14 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {0} {1}>'.format(self.title, self.categorie)
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    sender_name = db.Column(db.String(20), nullable=False)
+    sender_email = db.Column(db.String(120), nullable=False)
+    subject = db.Column(db.String(120))
+    message_body = db.Column(db.String(1000))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Message {} received from {}>'.format(self.body, self.sender_name)

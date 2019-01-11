@@ -1,8 +1,8 @@
 from flask import render_template, url_for, redirect, flash, current_app
-from app.models import Post
+from app.models import Post, Message
 from app.main.forms import ContactForm
 from app.main import bp
-from app.email import send_email
+from app import db
 
 @bp.route('/')
 @bp.route('/home')
@@ -19,10 +19,10 @@ def about():
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
-        subject = form.subject.data if form.subject is not None else ''
-        message_from = 'message: {} from {}'.format(form.message.data, form.email.data)
-        send_email(subject, current_app.config['ADMINS'][0], \
-                    current_app.config['ADMINS'], message_from)
+        msg = Message(sender_name=form.name.data, sender_email=form.email.data, \
+                            subject=form.subject.data, message_body=form.message.data)
+        db.session.add(msg)
+        db.session.commit()
         flash('your request will be answered as soon as possiable.')
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
