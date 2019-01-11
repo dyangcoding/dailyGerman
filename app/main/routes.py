@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, flash, current_app
+from flask import render_template, url_for, redirect, flash
 from app.models import Post, Message
 from app.main.forms import ContactForm
 from app.main import bp
@@ -43,7 +43,7 @@ def interview():
 
 @bp.route('/posts/dailyGerman')
 def dailyGerman():
-    posts = Post.query.filter_by(categorie='German 100').all()
+    posts = Post.query.filter_by(categorie='DailyGerman').all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/film')
