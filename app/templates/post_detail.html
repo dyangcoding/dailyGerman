@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block app_content %}
 <div class="row"> 
     <div class="col-md-8"> 
@@ -11,8 +10,6 @@
         </p>
         <hr>
         <p>{{ post.content | markdown | safe}}</p>
-
-        <hr>
     </div>
 </div>
 {% endblock %}

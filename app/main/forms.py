@@ -3,8 +3,10 @@ from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, InputRequired, Email
 
 class ContactForm(FlaskForm):
-    name = StringField('Name',  [InputRequired("Please enter your name.")])
-    subject = StringField('Subject')
-    email = StringField("Email",  [InputRequired("Please enter your email address."), Email("This field requires a valid email address")])
-    message = TextAreaField('Message', [InputRequired("Not including a message would be stupid")])
-    submit = SubmitField('Send')
+    name = StringField('Name',  [InputRequired("Bitte deinen Name angeben.")])
+    subject = StringField('Betreff')
+    email = StringField("Email",  [InputRequired("Bitte Email Adresse angeben."), \
+             Email("Dieses Feld erfordert eine gültige EMail Adresse")])
+    message = TextAreaField('Nachricht', [InputRequired("Eine leere Nachricht \
+                ist doch doof oder ?")])
+    submit = SubmitField('Senden')

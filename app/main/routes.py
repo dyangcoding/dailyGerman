@@ -21,7 +21,7 @@ def contact():
     form = ContactForm()
     if form.validate_on_submit():
         msg = Message(sender_name=form.name.data, sender_email=form.email.data, \
-                            subject=form.subject.data, message_body=form.message.data)
+                      subject=form.subject.data, message_body=form.message.data)
         db.session.add(msg)
         db.session.commit()
         flash('your request will be answered as soon as possiable.')
@@ -38,20 +38,24 @@ def detail(post_id):
 
 @bp.route('/posts/interview')
 def interview():
-    posts = Post.query.filter_by(categorie='Interview').order_by(Post.timestamp.desc()).all()
+    posts = Post.query.filter_by(categorie='Interview'). \
+            order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/dailyGerman')
 def dailyGerman():
-    posts = Post.query.filter_by(categorie='DailyGerman').order_by(Post.timestamp.desc()).all()
+    posts = Post.query.filter_by(categorie='DailyGerman'). \
+            order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/film')
 def film():
-    posts = Post.query.filter_by(categorie='Film').order_by(Post.timestamp.desc()).all()
+    posts = Post.query.filter_by(categorie='Film'). \
+            order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/song')
 def song():
-    posts = Post.query.filter_by(categorie='Song').order_by(Post.timestamp.desc()).all()
+    posts = Post.query.filter_by(categorie='Song'). \
+            order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
