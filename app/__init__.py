@@ -11,7 +11,7 @@ from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
 from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
-from flask_cache import Cache
+from flask_caching import Cache
 from config import Config
 from .forms import LoginForm
 

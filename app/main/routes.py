@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash
+from flask import render_template, url_for, redirect, flash, current_app
 from app.models import Post, Message
 from app.main.forms import ContactForm
 from app.main import bp
@@ -9,6 +9,7 @@ from app import db, cache
 @cache.cached(300, key_prefix='all_posts')
 def home():
     posts = Post.query.filter(Post.categorie != 'About').all()
+    current_app.logger.info('display all posts.')
     return render_template('home.html', posts=posts)
 
 @bp.route('/about')
@@ -16,6 +17,7 @@ def home():
 def about():
     about = Post.query.filter_by(categorie='About').first()
     text = 'Oops, noch kein Inhalt hier !' if about is None else about.content
+    current_app.logger.info('display about post.')
     return render_template('about.html', title='About', text=text)
 
 @bp.route('/contact', methods=['GET', 'POST'])
@@ -43,6 +45,7 @@ def detail(post_id):
 def interview():
     posts = Post.query.filter_by(categorie='Interview'). \
             order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('display interview posts.')
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/dailyGerman')
@@ -50,6 +53,7 @@ def interview():
 def dailyGerman():
     posts = Post.query.filter_by(categorie='DailyGerman'). \
             order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('display daily german posts.')
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/film')
@@ -57,6 +61,7 @@ def dailyGerman():
 def film():
     posts = Post.query.filter_by(categorie='Film'). \
             order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('display film posts.')
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/song')
@@ -64,4 +69,5 @@ def film():
 def song():
     posts = Post.query.filter_by(categorie='Song'). \
             order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('disply song posts.')
     return render_template('home.html', posts=posts)
