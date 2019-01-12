@@ -11,6 +11,7 @@ from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
 from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
+from flask_cache import Cache
 from config import Config
 from .forms import LoginForm
 
@@ -24,6 +25,7 @@ mail = Mail()
 bootstrap = Bootstrap()
 moment = Moment()
 md = Misaka()
+cache = Cache(config={'CACHE_TYPE': 'simple'})
 
 class DGAdminIndexView(AdminIndexView):
     @expose('/')
@@ -91,6 +93,7 @@ def create_app(config_class=Config):
     moment.init_app(app)
     SimpleMDE(app)
     md.init_app(app)
+    cache.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)

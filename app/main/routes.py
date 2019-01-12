@@ -2,15 +2,17 @@ from flask import render_template, url_for, redirect, flash
 from app.models import Post, Message
 from app.main.forms import ContactForm
 from app.main import bp
-from app import db
+from app import db, cache
 
 @bp.route('/')
 @bp.route('/home')
+@cache.cached(300, key_prefix='all_posts')
 def home():
     posts = Post.query.filter(Post.categorie != 'About').all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/about')
+@cache.cached(300)
 def about():
     about = Post.query.filter_by(categorie='About').first()
     text = 'Oops, noch kein Inhalt hier !' if about is None else about.content
@@ -37,24 +39,28 @@ def detail(post_id):
     return render_template('post_detail.html', post=post)
 
 @bp.route('/posts/interview')
+@cache.cached(300, key_prefix='interview_posts')
 def interview():
     posts = Post.query.filter_by(categorie='Interview'). \
             order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/dailyGerman')
+@cache.cached(300, key_prefix='dailygerman_posts')
 def dailyGerman():
     posts = Post.query.filter_by(categorie='DailyGerman'). \
             order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/film')
+@cache.cached(300, key_prefix='film_posts')
 def film():
     posts = Post.query.filter_by(categorie='Film'). \
             order_by(Post.timestamp.desc()).all()
     return render_template('home.html', posts=posts)
 
 @bp.route('/posts/song')
+@cache.cached(300, key_prefix='song_posts')
 def song():
     posts = Post.query.filter_by(categorie='Song'). \
             order_by(Post.timestamp.desc()).all()
