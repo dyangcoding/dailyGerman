@@ -10,3 +10,9 @@ class ContactForm(FlaskForm):
     message = TextAreaField('Nachricht', [InputRequired("Eine leere Nachricht \
                 ist doch doof oder ?")])
     submit = SubmitField('Senden')
+
+class CommentForm(FlaskForm):
+    name = StringField('Name',  [InputRequired("Bitte deinen Name angeben.")])
+    comment = TextAreaField('Kommentar', [InputRequired("Ein Kommentar \
+                ist erforderlich. ")])
+    submit = SubmitField('Senden')

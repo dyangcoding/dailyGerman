@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask import current_app
 from app import login, db
-
+from hashlib import md5
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -48,6 +48,10 @@ class Post(db.Model):
     content = db.Column(db.Text(4294000000))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    comments = db.relationship('Comment', backref='title', lazy='dynamic')
+
+    def get_comments(self):
+        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc())
 
     def __repr__(self):
         return '<Post {0} {1}>'.format(self.title, self.categorie)
@@ -62,3 +66,18 @@ class Message(db.Model):
 
     def __repr__(self):
         return '<Message {} received from {}>'.format(self.body, self.sender_name)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.String(20), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    comment = db.Column(db.Text)
+
+    def __repr__(self):
+            return '<Comment {0} {1}>'.format(self.user_name, self.timestamp)
+    
+    def avatar(self, size):
+        digest = md5(self.user_name.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size)

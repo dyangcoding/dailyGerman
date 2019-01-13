@@ -10,6 +10,10 @@
         </p>
         <hr>
         <p>{{ post.content | markdown | safe}}</p>
+
+    </hr>
+
+    {{ wtf.quick_form(form) }}
     </div>
 </div>
 {% endblock %}
