@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash, current_app
+from flask import render_template, url_for, redirect, flash, current_app, request
 from app.models import Post, Message, Comment
 from app.main.forms import ContactForm, CommentForm
 from app.main import bp
@@ -15,14 +15,13 @@ def about():
     about_post = Post.query.filter_by(categorie='About').first()
     return render_template('about.html', title='About', text=about_post.content)
 
-@bp.route('/contact', methods=['GET', 'POST'])
+@bp.route('/contact', methods=['POST'])
 def contact():
     form = ContactForm()
     if form.validate_on_submit():
         msg = Message(sender_name=form.name.data, sender_email=form.email.data, \
-                            subject=form.subject.data, message_body=form.message.data)
-        db.session.add(msg)
-        db.session.commit()
+                    subject=form.subject.data, message_body=form.message.data)
+        msg.save()
         flash('your request will be answered as soon as possiable.')
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
@@ -33,19 +32,15 @@ def detail(post_id):
     if post is None:
         flash('The Artikel does not exist or it has been removed.')
         return redirect(url_for('.home'))
-    comments = Comment.query.filter_by(post_id=post_id). \
-                order_by(Comment.timestamp.desc()).all()
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(author=form.author.data, \
                     comment=form.comment.data, post_id=post_id)
-        db.session.add(comment)
-        db.session.commit()
+        comment.save()
         flash('your comment is added.')
-        new_comments = Comment.query.filter_by(post_id=post_id). \
-                order_by(Comment.timestamp.desc()).all()
-        return render_template('post_detail.html', post=post, comments=new_comments)
-    return render_template('post_detail.html', post=post, comments=comments)
+        return redirect(request.url)
+    return render_template('post_detail.html', post=post, \
+                            comments=post.get_comments(), form=form)
 
 @bp.route('/posts/interview')
 def interview():

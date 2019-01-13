@@ -50,8 +50,12 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     comments = db.relationship('Comment', backref='title', lazy='dynamic')
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
     def get_comments(self):
-        return Comment.query.filter_by(post_id=post.id).order_by(Comment.timestamp.desc())
+        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc())
 
     def __repr__(self):
         return '<Post {0} {1}>'.format(self.title, self.categorie)
@@ -67,6 +71,10 @@ class Message(db.Model):
     def __repr__(self):
         return '<Message {} received from {}>'.format(self.body, self.sender_name)
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.String(20), nullable=False)
@@ -74,6 +82,10 @@ class Comment(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     comment = db.Column(db.Text)
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        
     def __repr__(self):
             return '<Comment {0} {1}>'.format(self.author, self.timestamp)
     

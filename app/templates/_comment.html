@@ -1,9 +1,8 @@
 <table>
     <tr valign="top">
         <td><img src="{{ comment.avatar(64) }}"></td>
-        <td>
-            <h1>{{ comment.author }}</h1>
-            {{ moment(comment.timestamp).calendar() }}
-        </td>
+        <td>{{ comment.author }}</td>
+        <td>{{ moment(comment.timestamp).fromNow() }} </td>
+        {{comment.comment}}
     </tr>
 </table>
