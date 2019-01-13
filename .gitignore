@@ -20,3 +20,6 @@ logs/
 
 #vs code settings
 .vscode/
+
+# https setting
+SSL/

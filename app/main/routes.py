@@ -1,6 +1,6 @@
 from flask import render_template, url_for, redirect, flash, current_app
-from app.models import Post, Message
-from app.main.forms import ContactForm
+from app.models import Post, Message, Comment
+from app.main.forms import ContactForm, CommentForm
 from app.main import bp
 from app import db
 
@@ -27,13 +27,25 @@ def contact():
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
 
-@bp.route('/<int:post_id>/detail')
+@bp.route('/<int:post_id>/detail', methods=['GET', 'POST'])
 def detail(post_id):
     post = Post.query.get(post_id)
     if post is None:
         flash('The Artikel does not exist or it has been removed.')
         return redirect(url_for('.home'))
-    return render_template('post_detail.html', post=post)
+    comments = Comment.query.filter_by(post_id=post_id). \
+                order_by(Comment.timestamp.desc()).all()
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(author=form.author.data, \
+                    comment=form.comment.data, post_id=post_id)
+        db.session.add(comment)
+        db.session.commit()
+        flash('your comment is added.')
+        new_comments = Comment.query.filter_by(post_id=post_id). \
+                order_by(Comment.timestamp.desc()).all()
+        return render_template('post_detail.html', post=post, comments=new_comments)
+    return render_template('post_detail.html', post=post, comments=comments)
 
 @bp.route('/posts/interview')
 def interview():

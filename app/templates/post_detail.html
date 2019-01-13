@@ -13,6 +13,11 @@
         <p>{{ post.content | markdown | safe}}</p>
 
         <hr>
+        {% for comment in comments %}
+            {% include '_comment.html' %}
+        {% endfor %}
+        <hr>
+        {{ wtf.quick_form(form) }}
     </div>
 </div>
 {% endblock %}

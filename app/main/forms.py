@@ -9,3 +9,9 @@ class ContactForm(FlaskForm):
     email = EmailField('Email Address', validators=[DataRequired()])
     message = TextAreaField('Message', validators=[DataRequired(), Length(max=1000)])
     submit = SubmitField('Send')
+
+class CommentForm(FlaskForm):
+    author = StringField('Name', validators=[DataRequired()])
+    comment = TextAreaField('Kommentar', validators=[DataRequired('Ein Kommentar \
+                ist erforderlich. ')])
+    submit = SubmitField('Senden')
