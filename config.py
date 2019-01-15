@@ -25,5 +25,9 @@ class Config(object):
     SIMPLEMDE_USE_CDN = True
     FLASK_ADMIN_SWATCH = 'cerulean'
     MAIL_SUPPRESS_SEND = False
-    MAIL_SUPPRESS_SEND = False
     TESTING = False
+    DEBUG = False
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True

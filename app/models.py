@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
-    
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -27,7 +27,7 @@ class User(UserMixin, db.Model):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             current_app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
-    
+
     @staticmethod
     def verify_reset_password_token(token):
         try:
@@ -44,6 +44,7 @@ def load_user(id):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    img_path = db.Column(db.String(140))
     categorie = db.Column(db.String(20), index=True)
     content = db.Column(db.Text(4294000000))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

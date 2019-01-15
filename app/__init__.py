@@ -12,6 +12,7 @@ from flask_misaka import Misaka
 from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from flask_caching import Cache
+from flask_sslify import SSLify
 from config import Config
 from .forms import LoginForm
 
@@ -94,6 +95,7 @@ def create_app(config_class=Config):
     SimpleMDE(app)
     md.init_app(app)
     cache.init_app(app)
+    SSLify(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
