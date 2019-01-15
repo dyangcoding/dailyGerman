@@ -5,7 +5,7 @@
     Posted by Daily German on {{ moment(post.timestamp).format('LLL') }}
 </p>
 <hr>
-    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+    <img class="img-responsive" src="{{url_for('static', filename=post.img_path)}}" alt="">
 <hr>
 <p>{{ post.content | markdown | safe}}</p>
 <a class="btn btn-primary" href="{{ url_for('main.detail', post_id=post.id) }}">

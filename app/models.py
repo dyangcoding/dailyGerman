@@ -44,6 +44,7 @@ def load_user(id):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    img_path = db.Column(db.String(140))
     categorie = db.Column(db.String(20), index=True)
     content = db.Column(db.Text(4294000000))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
@@ -85,7 +86,7 @@ class Comment(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
-        
+
     def __repr__(self):
             return '<Comment {0} {1}>'.format(self.author, self.timestamp)
     
