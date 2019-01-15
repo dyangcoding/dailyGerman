@@ -26,3 +26,6 @@ app.db
 
 # https certificate
 SSL/
+
+# images
+app/static/images
