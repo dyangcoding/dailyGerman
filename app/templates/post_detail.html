@@ -12,6 +12,8 @@
         <hr>
         <p>{{ post.content | markdown | safe}}</p>
 
+        {{ share.create(title='Teilen: ', sites='wechat, facebook, twitter, google, linkedin') }}
+
         <hr>
         {% for comment in comments %}
             {% include '_comment.html' %}
