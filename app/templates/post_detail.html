@@ -10,6 +10,8 @@
             Posted on {{ moment(post.timestamp).format('LLL') }}
         </p>
         <hr>
+        <img class="img-responsive" src="{{url_for('static', filename='images/post-header-sich-vorstellen.jpeg')}}" alt="">
+        <hr>
         <p>{{ post.content | markdown | safe}}</p>
 
         {{ share.create(title='Teilen: ', sites='wechat, facebook, twitter, google, linkedin') }}
