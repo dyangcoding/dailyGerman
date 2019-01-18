@@ -9,6 +9,7 @@ from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
+from flask_share import Share
 from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from flask_caching import Cache
@@ -27,6 +28,7 @@ bootstrap = Bootstrap()
 moment = Moment()
 md = Misaka()
 cache = Cache(config={'CACHE_TYPE': 'simple'})
+share = Share()
 
 class DGAdminIndexView(AdminIndexView):
     @expose('/')
@@ -96,6 +98,7 @@ def create_app(config_class=Config):
     md.init_app(app)
     cache.init_app(app)
     SSLify(app)
+    share.init_app(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
