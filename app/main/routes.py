@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash, current_app
+from flask import render_template, url_for, redirect, flash, current_app, request
 from app.models import Post, Message
 from app.main.forms import ContactForm
 from app.main import bp
@@ -33,6 +33,7 @@ def contact():
     return render_template('contact.html', title='Contact', form=form)
 
 @bp.route('/<int:post_id>/detail')
+@cache.cached(300, query_string=True)
 def detail(post_id):
     post = Post.query.get(post_id)
     if post is None:
