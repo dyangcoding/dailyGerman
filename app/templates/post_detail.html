@@ -8,6 +8,10 @@
         <p><span class="glyphicon glyphicon-time"></span>
             Posted on {{ moment(post.timestamp).format('LLL') }}
         </p>
+        {% if post.img_path %}
+        <hr>
+            <img class="img-responsive" src="{{url_for('static', filename=post.img_path)}}" alt="">
+        {% endif %}
         <hr>
         <p>{{ post.content | markdown | safe}}</p>
 
