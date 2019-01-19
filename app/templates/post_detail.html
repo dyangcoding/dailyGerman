@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block head %}
   {{ super() }}
-  {{ share.load() }}  
+  {{ share.load() }}
 {% endblock %}
 {% block app_content %}
 <div class="row">
@@ -14,7 +14,7 @@
         </p>
         {% if post.img_path %}
         <hr>
-            <img class="img-responsive" src="{{resized_img_src(post.img_path)}}" alt="">
+            <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, mode='pad')}}" alt="">
         {% endif %}
         <hr>
         <p>{{ post.content | markdown | safe}}</p>
