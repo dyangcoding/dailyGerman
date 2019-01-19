@@ -7,13 +7,13 @@ from flask_login import LoginManager, current_user, login_required, login_user, 
 from flask_mail import Mail
 from flask_moment import Moment
 from flask_bootstrap import Bootstrap
-from flask_simplemde import SimpleMDE
 from flask_misaka import Misaka
 from flask_share import Share
 from flask_admin import Admin, expose, AdminIndexView, helpers
 from flask_admin.contrib.sqla import ModelView
 from flask_caching import Cache
 from flask_sslify import SSLify
+from flask_images import Images
 from config import Config
 from .forms import LoginForm
 
@@ -94,12 +94,12 @@ def create_app(config_class=Config):
     mail.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
-    SimpleMDE(app)
     md.init_app(app)
     cache.init_app(app)
     SSLify(app)
     share.init_app(app)
-
+    Images(app)
+    
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
