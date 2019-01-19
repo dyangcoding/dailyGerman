@@ -6,7 +6,7 @@
 </p>
 {% if post.img_path %}
 <hr>
-    <img class="img-responsive" src="{{url_for('static', filename=post.img_path)}}" alt="">
+    <img class="img-responsive" src="{{resized_img_src(post.img_path)}}" alt="">
 {% endif %}
 <hr>
 <p>{{ post.content | markdown | safe | truncate(300) }}</p>

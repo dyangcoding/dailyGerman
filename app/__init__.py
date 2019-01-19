@@ -14,6 +14,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_caching import Cache
 from flask_sslify import SSLify
 from flask_images import Images
+from flask_images import resized_img_src
 from config import Config
 from .forms import LoginForm
 

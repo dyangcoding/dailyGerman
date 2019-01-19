@@ -31,3 +31,4 @@ class Config(object):
     REMEMBER_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_HTTPONLY = True
+    IMAGES_PATH = ['static/images']
