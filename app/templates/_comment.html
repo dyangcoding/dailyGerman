@@ -1,0 +1,17 @@
+<div class="panel panel-white post panel-shadow">
+    <div class="post-heading">
+        <div class="pull-left image">
+            <img src="{{ comment.avatar(64) }}" class="img-circle avatar" alt="user profile image">
+        </div>
+        <div class="pull-left meta">
+            <div class="title h5">
+                {{ comment.author }}
+                sagt
+            </div>
+            <h6 class="text-muted time">{{ moment(comment.timestamp).fromNow() }}</h6>
+        </div>
+    </div>
+    <div class="post-description">
+        <p>{{comment.comment}}</p>
+    </div>
+</div>

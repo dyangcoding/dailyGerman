@@ -52,7 +52,7 @@ class Post(db.Model):
     comments = db.relationship('Comment', backref='title', lazy='dynamic')
 
     def get_comments(self):
-        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc())
+        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc()).all()
 
     def __repr__(self):
         return '<Post {0} {1}>'.format(self.title, self.categorie)
@@ -77,7 +77,7 @@ class Comment(db.Model):
 
     def __repr__(self):
             return '<Comment {0} {1}>'.format(self.user_name, self.timestamp)
-    
+
     def avatar(self, size):
         digest = md5(self.user_name.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(

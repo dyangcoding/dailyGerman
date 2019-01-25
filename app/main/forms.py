@@ -1,6 +1,6 @@
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, SubmitField, TextAreaField
-from wtforms.validators import DataRequired, InputRequired, Email
+from wtforms.validators import InputRequired, Email
 
 class ContactForm(FlaskForm):
     name = StringField('Name',  [InputRequired("Bitte deinen Name angeben.")])
@@ -15,4 +15,5 @@ class CommentForm(FlaskForm):
     name = StringField('Name',  [InputRequired("Bitte deinen Name angeben.")])
     comment = TextAreaField('Kommentar', [InputRequired("Ein Kommentar \
                 ist erforderlich. ")])
+    recaptcha = RecaptchaField()
     submit = SubmitField('Senden')

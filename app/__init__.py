@@ -15,6 +15,7 @@ from flask_caching import Cache
 from flask_sslify import SSLify
 from flask_images import Images
 from flask_images import resized_img_src
+from flask_disqus import Disqus
 from config import Config
 from .forms import LoginForm
 
@@ -100,7 +101,8 @@ def create_app(config_class=Config):
     SSLify(app)
     share.init_app(app)
     Images(app)
-    
+    Disqus(app)
+
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 

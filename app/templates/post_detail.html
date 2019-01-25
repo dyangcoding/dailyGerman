@@ -1,8 +1,17 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block head %}
   {{ super() }}
   {{ share.load() }}
 {% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- Custom comment stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/comment.css')}}" />
+{% endblock %}
+
 {% block app_content %}
 <div class="row">
     <div class="col-md-8 col-md-8 col-md-offset-2">
@@ -22,6 +31,16 @@
         <p>
         {{ share.create(title='Teilen: ', sites='wechat, facebook, twitter, google, linkedin') }}
         </p>
+
+        {% if comments %}
+        <hr>
+        <p>{{comments|length}} Kommentare</p>
+        {% endif %}
+        {% for comment in comments %}
+            {% include '_comment.html' %}
+        {% endfor %}
+        <hr>
+        {{ wtf.quick_form(form) }}
 
     </div>
 </div>
