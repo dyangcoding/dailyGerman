@@ -21,3 +21,5 @@ class Config(object):
     SIMPLEMDE_USE_CDN = True
     FLASK_ADMIN_SWATCH = 'cerulean'
     MAILGUN_API_KEY = os.environ.get('MAILGUN_API_KEY')
+    RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+    RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')

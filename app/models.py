@@ -56,7 +56,7 @@ class Post(db.Model):
         db.session.commit()
 
     def get_comments(self):
-        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc())
+        return Comment.query.filter_by(post_id=self.id).order_by(Comment.timestamp.desc()).all()
 
     def __repr__(self):
         return '<Post {0} {1}>'.format(self.title, self.categorie)
@@ -81,10 +81,23 @@ class Comment(db.Model):
     author = db.Column(db.String(20), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    likes = db.Column(db.Integer)
+    dislikes = db.Column(db.Integer)
+    disabled = db.Column(db.Boolean)
     comment = db.Column(db.Text)
 
     def save(self):
         db.session.add(self)
+        db.session.commit()
+
+    def like(self):
+        db.session.query().filter(Comment.id == self.id) \
+                          .update({"likes": (Comment.likes + 1)})
+        db.session.commit()
+
+    def dislike(self):
+        db.session.query().filter(Comment.id == self.id) \
+                          .update({"dislikes": (Comment.dislikes - 1)})
         db.session.commit()
 
     def __repr__(self):
