@@ -19,7 +19,7 @@
             {{post.title}}
         </h2>
         <p><span class="glyphicon glyphicon-time"></span>
-            Posted on {{ moment(post.timestamp).format('LLL') }}
+            Posted on {{ moment(post.timestamp).format('LL') }}
         </p>
         {% if post.img_path %}
         <hr>

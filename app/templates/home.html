@@ -24,13 +24,13 @@
                   <div class="col-lg-6">
                       <ul class="list-unstyled">
                               <li><a href="{{url_for('main.home')}}">All</a>
-                              (2)
+                              {% if posts %} ({{posts|length}}) {% else %} 0 {% endif %}
                               </li>
                               <li><a href="{{url_for('main.dailyGerman')}}">Daily German</a>
-                              (1)
+                              ({{ posts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.interview')}}">Interview</a>
-                              (1)
+                              ({{ posts | selectattr('categorie', 'equalto','Interview') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.film')}}">Film</a>
                               </li>
