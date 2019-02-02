@@ -50,6 +50,14 @@ def detail(post_id):
     return render_template('post_detail.html', post=post, \
                             comments=post.get_comments(), form=form)
 
+@bp.route('/posts/working')
+@cache.cached(300, key_prefix='working_posts')
+def working():
+    posts = Post.query.filter_by(categorie='Working'). \
+            order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('display working posts.')
+    return render_template('home.html', posts=posts)
+
 @bp.route('/posts/interview')
 @cache.cached(300, key_prefix='interview_posts')
 def interview():

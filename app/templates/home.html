@@ -29,6 +29,9 @@
                               <li><a href="{{url_for('main.dailyGerman')}}">Daily German</a>
                               ({{ posts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
                               </li>
+                              <li><a href="{{url_for('main.working')}}">Working</a>
+                              ({{ posts | selectattr('categorie', 'equalto','Working') | list | length}})
+                              </li>
                               <li><a href="{{url_for('main.interview')}}">Interview</a>
                               ({{ posts | selectattr('categorie', 'equalto','Interview') | list | length}})
                               </li>
