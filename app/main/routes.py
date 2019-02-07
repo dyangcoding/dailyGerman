@@ -33,9 +33,9 @@ def contact():
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
 
-@bp.route('/<int:post_id>/detail', methods=['GET', 'POST'])
+@bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
 @cache.cached(300, query_string=True)
-def detail(post_id):
+def showPost(post_id):
     post = Post.query.get(post_id)
     if post is None:
         flash('The Artikel has been removed.')

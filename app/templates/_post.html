@@ -1,5 +1,5 @@
 <h2>
-    <a href="{{ url_for('main.detail', post_id=post.id) }}">{{post.title}}</a>
+    <a href="{{ url_for('main.showPost', post_id=post.id) }}">{{post.title}}</a>
 </h2>
 <p><span class="glyphicon glyphicon-time"></span>
     Posted by Daily German on {{ moment(post.timestamp).format('LL') }}
@@ -10,7 +10,7 @@
 {% endif %}
 <hr>
 <p>{{ post.content | markdown | safe | truncate(300) }}</p>
-<a class="btn btn-primary" href="{{ url_for('main.detail', post_id=post.id) }}">
+<a class="btn btn-primary" href="{{ url_for('main.showPost', post_id=post.id) }}">
     Read More <span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 
