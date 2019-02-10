@@ -26,8 +26,8 @@ def contact():
         return redirect(url_for('.home'))
     return render_template('contact.html', title='Contact', form=form)
 
-@bp.route('/<int:post_id>/detail', methods=['GET', 'POST'])
-def detail(post_id):
+@bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
+def showPost(post_id):
     post = Post.query.get(post_id)
     if post is None:
         flash('The Artikel does not exist or it has been removed.')
