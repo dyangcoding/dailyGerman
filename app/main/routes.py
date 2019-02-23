@@ -60,7 +60,7 @@ def working():
     posts = Post.query.filter_by(categorie='Working'). \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('display working posts.')
-    return render_template('home.html', posts=posts, allPost=allPosts())
+    return render_template('home.html', posts=posts, allPosts=allPosts())
 
 @bp.route('/posts/interview')
 @cache.cached(300, key_prefix='interview_posts')
@@ -68,7 +68,7 @@ def interview():
     posts = Post.query.filter_by(categorie='Interview'). \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('display interview posts.')
-    return render_template('home.html', posts=posts, allPost=allPosts())
+    return render_template('home.html', posts=posts, allPosts=allPosts())
 
 @bp.route('/posts/dailyGerman')
 @cache.cached(300, key_prefix='dailygerman_posts')
@@ -76,7 +76,7 @@ def dailyGerman():
     posts = Post.query.filter_by(categorie='DailyGerman'). \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('display daily german posts.')
-    return render_template('home.html', posts=posts, allPost=allPosts())
+    return render_template('home.html', posts=posts, allPosts=allPosts())
 
 @bp.route('/posts/film')
 @cache.cached(300, key_prefix='film_posts')
@@ -84,7 +84,7 @@ def film():
     posts = Post.query.filter_by(categorie='Film'). \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('display film posts.')
-    return render_template('home.html', posts=posts, allPost=allPosts())
+    return render_template('home.html', posts=posts, allPosts=allPosts())
 
 @bp.route('/posts/song')
 @cache.cached(300, key_prefix='song_posts')
@@ -92,4 +92,4 @@ def song():
     posts = Post.query.filter_by(categorie='Song'). \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('disply song posts.')
-    return render_template('home.html', posts=posts, allPost=allPosts())
+    return render_template('home.html', posts=posts, allPosts=allPosts())
