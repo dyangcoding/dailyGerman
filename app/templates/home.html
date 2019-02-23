@@ -24,22 +24,22 @@
                   <div class="col-lg-6">
                       <ul class="list-unstyled">
                               <li><a href="{{url_for('main.home')}}">All</a>
-                              {% if posts %} ({{posts|length}}) {% else %} 0 {% endif %}
+                              {% if allPosts %} ({{posts|length}}) {% else %} 0 {% endif %}
                               </li>
                               <li><a href="{{url_for('main.dailyGerman')}}">Daily German</a>
-                              ({{ posts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
+                              ({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.working')}}">Working</a>
-                              ({{ posts | selectattr('categorie', 'equalto','Working') | list | length}})
+                              ({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.interview')}}">Interview</a>
-                              ({{ posts | selectattr('categorie', 'equalto','Interview') | list | length}})
+                              ({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.film')}}">Film</a>
-                              ({{ posts | selectattr('categorie', 'equalto','Film') | list | length}})
+                              ({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.song')}}">Song</a>
-                              ({{ posts | selectattr('categorie', 'equalto','Song') | list | length}})
+                              ({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})
                               </li>
                       </ul>
                   </div>
