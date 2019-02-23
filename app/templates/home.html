@@ -36,8 +36,10 @@
                               ({{ posts | selectattr('categorie', 'equalto','Interview') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.film')}}">Film</a>
+                              ({{ posts | selectattr('categorie', 'equalto','Film') | list | length}})
                               </li>
                               <li><a href="{{url_for('main.song')}}">Song</a>
+                              ({{ posts | selectattr('categorie', 'equalto','Song') | list | length}})
                               </li>
                       </ul>
                   </div>
