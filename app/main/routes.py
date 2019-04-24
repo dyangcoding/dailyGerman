@@ -93,3 +93,4 @@ def song():
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('disply song posts.')
     return render_template('home.html', posts=posts, allPosts=allPosts())
+    
