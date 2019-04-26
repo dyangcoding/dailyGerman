@@ -21,6 +21,11 @@
         <p><span class="glyphicon glyphicon-time"></span>
             Posted on {{ moment(post.timestamp).format('LL') }}
         </p>
+        {% if post.video_id %}
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="{{ "https://player.vimeo.com/video/" ~ post.video_id }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        {% endif %}
         {% if post.img_path %}
         <hr>
             <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, mode='pad')}}" alt="">
