@@ -44,6 +44,7 @@ def load_user(id):
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(140))
+    video_id = db.Column(db.String(64))
     img_path = db.Column(db.String(140))
     categorie = db.Column(db.String(20), index=True)
     content = db.Column(db.Text(4294000000))
