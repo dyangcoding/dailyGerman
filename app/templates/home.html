@@ -41,6 +41,9 @@
                               <li><a href="{{url_for('main.song')}}">Song</a>
                               ({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})
                               </li>
+                              <li><a href="{{url_for('main.friends')}}">Friends</a>
+                              ({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})
+                              </li>
                       </ul>
                   </div>
               </div>

@@ -93,3 +93,11 @@ def song():
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('disply song posts.')
     return render_template('home.html', posts=posts, allPosts=allPosts())
+
+@bp.route('/posts/friends')
+@cache.cached(300, key_prefix='friends_posts')
+def friends():
+    posts = Post.query.filter_by(categorie='Friends'). \
+            order_by(Post.timestamp.desc()).all()
+    current_app.logger.info('disply friends posts.')
+    return render_template('home.html', posts=posts, allPosts=allPosts())
