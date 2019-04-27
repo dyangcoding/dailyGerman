@@ -17,9 +17,9 @@ def home():
 @cache.cached(300)
 def about():
     about = Post.query.filter_by(categorie='About').first()
-    text = 'Oops, noch kein Inhalt hier !' if about is None else about.content
+    #text = 'Oops, noch kein Inhalt hier !' if about is None else about.content
     current_app.logger.info('display about post.')
-    return render_template('about.html', title='About', text=text)
+    return render_template('about.html', title='About', post=about)
 
 @bp.route('/contact', methods=['GET', 'POST'])
 def contact():
