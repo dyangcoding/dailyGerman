@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- Custom sticky footer stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/category.css')}}" />
+{% endblock %}
+
 {% block app_content %}
     <div class="row wrapper">
       <div class="col-md-8">
@@ -19,13 +26,20 @@
 
       <div class="col-md-4 position-top">
           <div class="well">
-              <h4>Blog Categories</h4>
+              <h4>Kategorie</h4>
               <div class="row">
-                  <div class="col-lg-6">
-                      <ul class="list-unstyled">
-                              <li><a href="{{url_for('main.home')}}">All</a>
+                  <div class="col-lg-12">
+                      <ul class="list-unstyled cat-list">
+                              <li>
+                                <a class="d-flex justify-content-between" href="{{url_for('main.home')}}">
+                                  <p>All</p>
+                                  <p>(10)</p>
+                                </a>
                               </li>
-                              <li><a href="{{url_for('main.dailyGerman')}}">Daily German 100</a>
+                              <li><a class="d-flex justify-content-between" href="{{url_for('main.dailyGerman')}}">
+                                  <p>Daily German</p>
+                                  <p>(3)</p>
+                                </a>
                               </li>
                               <li><a href="{{url_for('main.interview')}}">Interview</a>
                               </li>
