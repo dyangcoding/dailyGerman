@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+
+{% block styles %}
+    {{ super() }}
+    <!-- Custom sticky footer stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/category.css')}}" />
+{% endblock %}
+
 {% block app_content %}
     <div class="row">
       <div class="col-md-8">
@@ -19,30 +26,38 @@
 
       <div class="col-md-4 position-top">
           <div class="well">
-              <h4>Blog Categories</h4>
+              <h4>Kategorie</h4>
               <div class="row">
-                  <div class="col-lg-6">
-                      <ul class="list-unstyled">
-                              <li><a href="{{url_for('main.home')}}">All</a>
-                              {% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}
+                  <div class="col-lg-12">
+                      <ul class="list-unstyled cat-list">
+                              <li>
+                                  <a class="d-flex justify-content-center" href="{{url_for('main.home')}}">
+                                  All {% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.dailyGerman')}}">Daily German</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.dailyGerman')}}">
+                                  Daily German ({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.working')}}">Working</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.working')}}">
+                                  Working ({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.interview')}}">Interview</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.interview')}}">
+                                  Interview ({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.film')}}">Film</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.film')}}">
+                                  Film ({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.song')}}">Song</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.song')}}">
+                                  Song ({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})
+                                  </a>
                               </li>
-                              <li><a href="{{url_for('main.friends')}}">Friends</a>
-                              ({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})
+                              <li><a class="d-flex justify-content-center" href="{{url_for('main.friends')}}">
+                                  Friends ({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})
+                                  </a>
                               </li>
                       </ul>
                   </div>

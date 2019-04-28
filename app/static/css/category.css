@@ -1,0 +1,38 @@
+.cat-list li {
+    padding:13px 20px;
+    background:#ffffff;
+    margin-bottom:15px;
+    -webkit-transition:all 0.3s ease 0s;
+    -moz-transition:all 0.3s ease 0s;
+    -o-transition:all 0.3s ease 0s;
+    transition:all 0.3s ease 0s
+   }
+   .cat-list li:last-child {
+    margin-bottom:0px
+   }
+   .cat-list li p {
+    font-weight:300;
+    font-size:14px;
+    margin-bottom:0px;
+    -webkit-transition:all 0.3s ease 0s;
+    -moz-transition:all 0.3s ease 0s;
+    -o-transition:all 0.3s ease 0s;
+    transition:all 0.3s ease 0s
+   }
+   .cat-list li a {
+    color:#797979;
+    -webkit-transition:all 0.3s ease 0s;
+    -moz-transition:all 0.3s ease 0s;
+    -o-transition:all 0.3s ease 0s;
+    transition:all 0.3s ease 0s
+   }
+   .cat-list li:hover {
+    box-shadow:0px 10px 30px 0px rgba(153,153,153,0.2)
+   }
+   .cat-list li:hover a {
+    text-decoration: none;
+    color: #74B1FF
+   }
+   .cat-list li:hover p {
+    color:#74B1FF
+   }

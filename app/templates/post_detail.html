@@ -19,7 +19,7 @@
             {{post.title}}
         </h2>
         <p><span class="glyphicon glyphicon-time"></span>
-            Posted by Daily German on {{ moment(post.timestamp).format('LL') }}
+            Daily German {{ moment(post.timestamp).format('LL') }}
         </p>
         {% if post.video_id %}
         <div class="embed-responsive embed-responsive-16by9">
