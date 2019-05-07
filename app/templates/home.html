@@ -6,6 +6,10 @@
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/category.css')}}" />
 {% endblock %}
 
+{% block scripts %}
+  <script type="text/javascript" src="{{ url_for('static', filename='js/back2Top.js') }}"></script>
+{% endblock %}
+
 {% block app_content %}
     <div class="row">
       <div class="col-md-8">
@@ -85,5 +89,7 @@
               </div>
           </div>
       </div>
+
+      <button onclick="topFunction()" id="backToTop" title="Go to top">Top</button>
     </div>
 {% endblock app_content %}
