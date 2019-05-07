@@ -25,45 +25,59 @@
       </div>
 
       <div class="col-md-4 position-top">
-          <div class="well">
+          <div class="well cat-container">
               <h4>Kategorie</h4>
               <div class="row">
                   <div class="col-md-10 col-md-offset-1">
                       <ul class="list-unstyled cat-list">
                               <li>
                                   <a href="{{url_for('main.home')}}">
-                                  <span>All</span>
-                                  <span class="pull-right">{% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}</span>
+                                  <p>
+                                      <span>All</span>
+                                      <span class="pull-right">{% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.dailyGerman')}}">
-                                  <span>Daily German</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})</span>
+                                  <p>
+                                      <span>Daily German</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.working')}}">
-                                  <span>Working</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})</span>
+                                  <p>
+                                      <span>Working</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.interview')}}">
-                                  <span>Interview</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})</span>
+                                  <p>
+                                      <span>Interview</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.film')}}">
-                                  <span>Film</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})</span>
+                                  <p>
+                                      <span>Film</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.song')}}">
-                                  <span>Song</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})</span>
+                                  <p>
+                                      <span>Song</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                               <li><a href="{{url_for('main.friends')}}">
-                                  <span>Friends</span>
-                                  <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})</span>
+                                  <p>
+                                      <span>Friends</span>
+                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})</span>
+                                  </p>
                                   </a>
                               </li>
                       </ul>
