@@ -11,7 +11,7 @@
 {% endif %}
 {% if post.img_path %}
 <hr>
-    <img class="img-responsive" src="{{resized_img_src(post.img_path, height=700, mode='pad')}}" alt="">
+    <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, height=300, mode='crop', quality=95)}}" alt="">
 {% endif %}
 <hr>
 {% if post.video_id %}
