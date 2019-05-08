@@ -8,6 +8,7 @@
 
 {% block scripts %}
   <script type="text/javascript" src="{{ url_for('static', filename='js/back2Top.js') }}"></script>
+  {{super()}}
 {% endblock %}
 
 {% block app_content %}
@@ -29,7 +30,7 @@
 
       </div>
 
-      <!--div class="col-md-4 position-top">
+      <div class="col-md-4 position-top">
           <div class="well">
               <h4>Kategorie</h4>
               <div class="row">
@@ -56,9 +57,10 @@
                   </div>
               </div>
           </div>
-      </div-->
+      </div>
 
-      <button onclick="topFunction()" id="backToTop" title="Go to top">Top</button> 
+      <!--button onclick="topFunction()" id="backToTop" title="Go to top">Top</button--> 
+      <a id="backToTop" onclick="topFunction()" class="btn btn-social-icon btn-lg"><i class="fas fa-arrow-circle-up"></i></a>
   </div>
     
 {% endblock app_content %}
