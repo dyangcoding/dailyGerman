@@ -8,8 +8,7 @@
 
 {% block styles %}
     {{ super() }}
-    <!-- Custom comment stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="https://www.daily-german.com/static/css/comment.css" />
+    <link type="text/css" rel="stylesheet" href="/static/css/comment.css" />
 {% endblock %}
 
 {% block app_content %}
@@ -48,5 +47,7 @@
         {{ wtf.quick_form(form) }}
 
     </div>
+
+    <a id="backToTop" onclick="topFunction()" class="btn btn-social-icon btn-lg"><i class="fas fa-arrow-circle-up"></i></a>
 </div>
 {% endblock %}

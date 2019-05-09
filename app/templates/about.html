@@ -7,7 +7,7 @@
             </h2>
             {% if post.img_path %}
             <hr>
-                <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, mode='pad')}}" alt="Photo by Paul Minami on Unsplash">
+                <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, height=400, mode='crop', quality=95)}}" alt="Photo by Paul Minami on Unsplash">
             {% endif %}
             <hr>
             {{post.content | markdown }}
