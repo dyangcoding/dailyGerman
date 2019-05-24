@@ -3,6 +3,7 @@ from app.models import Post, Message, Comment
 from app.main.forms import ContactForm, CommentForm
 from app.main import bp
 from app import db, cache
+from app.email import send_email
 
 @bp.route('/')
 @bp.route('/home')
@@ -46,6 +47,7 @@ def showPost(post_id):
                     comment=form.comment.data, post_id=post_id)
         comment.save()
         flash('your comment is added.')
+        send_email(form.author.data, post.title)
         return redirect(request.url)
     return render_template('post_detail.html', post=post, \
                             comments=post.get_comments(), form=form)
