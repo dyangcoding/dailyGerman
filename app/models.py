@@ -71,15 +71,19 @@ class Message(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_name = db.Column(db.String(20), nullable=False)
+    author = db.Column(db.String(20), nullable=False)
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     comment = db.Column(db.Text)
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
     def __repr__(self):
-            return '<Comment {0} {1}>'.format(self.user_name, self.timestamp)
+            return '<Comment {0} {1}>'.format(self.author, self.timestamp)
 
     def avatar(self, size):
-        digest = md5(self.user_name.lower().encode('utf-8')).hexdigest()
+        digest = md5(self.author.lower().encode('utf-8')).hexdigest()
         return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
             digest, size)

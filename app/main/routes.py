@@ -35,19 +35,19 @@ def contact():
     return render_template('contact.html', title='Contact', form=form)
 
 @bp.route('/post/<int:post_id>', methods=['GET', 'POST'])
-@cache.cached(300, query_string=True)
 def showPost(post_id):
     post = Post.query.get(post_id)
     if post is None:
-        flash('The Artikel has been removed.')
+        flash('Der Artikel ist möglichweise gelöscht.')
         return redirect(url_for('.home'))
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(author=form.author.data, \
+        comment = Comment(author=form.name.data, \
                     comment=form.comment.data, post_id=post_id)
         comment.save()
-        flash('your comment is added.')
-        send_email(form.author.data, post.title)
+        current_app.logger.info('comment user name {}'.format(comment.author))
+        flash('Dein Kommentar ist hinzugefügt.')
+        send_email(post.id)
         return redirect(request.url)
     return render_template('post_detail.html', post=post, \
                             comments=post.get_comments(), form=form)

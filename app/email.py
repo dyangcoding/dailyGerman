@@ -7,13 +7,13 @@ from string import Template
 def send_async_email(app, msg):
     with app.app_context():
         mail.send(msg)
-    
-def send_email(user_name, post_name, sync=False):
+
+def send_email(post_id, sync=False):
     subject = 'Neues Kommentar !'
     recipients = [current_app.config['MAIL_USERNAME']]
     msg = Message(subject, recipients=recipients)
-    msg.body = Template('$name postet ein Kommentar bei Post $post') \
-        .substitute(name = user_name, post = post_name)
+    msg.body = Template('Neues Kommentar www.daily-german.com/post/$id') \
+        .substitute(id = post_id)
     if sync:
         mail.send(msg)
     else:
