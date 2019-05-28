@@ -12,8 +12,8 @@ class ContactForm(FlaskForm):
     submit = SubmitField('Senden')
 
 class CommentForm(FlaskForm):
-    name = StringField('Name',  [InputRequired("Bitte deinen Name angeben.")])
-    comment = TextAreaField('Kommentar', [InputRequired("Ein Kommentar \
+    name = StringField('Name *',  [InputRequired("Bitte deinen Name angeben.")])
+    comment = TextAreaField('Kommentar *', [InputRequired("Ein Kommentar \
                 ist erforderlich. ")])
     recaptcha = RecaptchaField()
     submit = SubmitField('Senden')
