@@ -5,16 +5,6 @@
     {% if title %}{{ title }} - Daily German{% else %}Daily German{% endif %}
 {% endblock %}
 
-{% block styles %}
-    {{ super() }}
-    <!-- Custom sticky footer stlylesheet -->
-    <link type="text/css" rel="stylesheet" href="/static/css/footer.css" />
-    <link type="text/css" rel="stylesheet" href="/static/css/fontawesome.min.css" />
-    <link type="text/css" rel="stylesheet" href="/static/css/brands.min.css" />
-    <link type="text/css" rel="stylesheet" href="/static/css/solid.min.css" />
-{% endblock %}
-
-
 {% block navbar %}
     <nav class="navbar navbar-default">
         <div class="container">
