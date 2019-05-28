@@ -2,6 +2,12 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.webp">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.webp">
+    {% assets "main_js" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+    {% assets "main_css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133276016-1"></script>
     <script>

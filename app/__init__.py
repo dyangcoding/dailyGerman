@@ -15,9 +15,9 @@ from flask_caching import Cache
 from flask_sslify import SSLify
 from flask_images import Images
 from flask_images import resized_img_src
-from flask_disqus import Disqus
 from config import Config
 from .forms import LoginForm
+from flask_assets import Bundle, Environment
 
 migrate = Migrate()
 db = SQLAlchemy()
@@ -83,6 +83,14 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
+    js = Bundle('js/back2Top.js', output='gen/main.js', filter='jsmin')
+    css = Bundle('css/brands.min.css', 'css/category.css', \
+                'css/comment.css', 'css/fontawesome.min.css', 'css/footer.css' \
+                'css/plyr.css', 'css/solid.min.css', output='gen/main.css', filter='cssmin')
+    assets = Environment(app)
+    assets.register('main_js', js)
+    assets.register('main_css', css)
+
     db.init_app(app)
     migrate.init_app(app, db)
     from .models import User
@@ -101,7 +109,6 @@ def create_app(config_class=Config):
     SSLify(app)
     share.init_app(app)
     Images(app)
-    Disqus(app)
 
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
