@@ -30,3 +30,7 @@ SSL/
 
 # images
 app/static/images
+
+#generated static files
+app/static/gen
+app/static/.webassets-cache

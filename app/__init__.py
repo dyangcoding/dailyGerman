@@ -83,10 +83,10 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    js = Bundle('js/back2Top.js', output='gen/main.js', filter='jsmin')
-    css = Bundle('css/brands.min.css', 'css/category.css', \
-                'css/comment.css', 'css/fontawesome.min.css', 'css/footer.css' \
-                'css/plyr.css', 'css/solid.min.css', output='gen/main.css', filter='cssmin')
+    js = Bundle('js/back2Top.js', output='gen/main.js', filters='jsmin')
+    css = Bundle('css/footer.css', 'css/brands.min.css', 'css/category.css', \
+                'css/comment.css', 'css/fontawesome.min.css', \
+                'css/plyr.css', 'css/solid.min.css', output='gen/main.css', filters='cssmin')
     assets = Environment(app)
     assets.register('main_js', js)
     assets.register('main_css', css)

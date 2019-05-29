@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default nav-header">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container main">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -63,5 +63,4 @@
     {{ super() }}
     {{ moment.include_moment() }}
     {{ moment.locale('de')}}
-    <script type="text/javascript" src="/static/js/back2Top.js"></script>
 {% endblock %}
