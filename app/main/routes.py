@@ -1,9 +1,19 @@
-from flask import render_template, url_for, redirect, flash, current_app, request
+from flask import render_template, url_for, redirect, flash, current_app, request, send_from_directory, make_response
 from app.models import Post, Message, Comment
 from app.main.forms import ContactForm, CommentForm
 from app.main import bp
 from app import db, cache
 from app.email import send_email
+
+@bp.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')
+
+@bp.route('/pwabuilder-sw.js')
+def service_worker():
+    response = make_response(send_from_directory('static', 'pwabuilder-sw.js'))
+    response.headers['Cache-Control'] = 'no-cache'
+    return response
 
 @bp.route('/')
 @bp.route('/home')
