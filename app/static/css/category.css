@@ -54,3 +54,8 @@
     padding: 10px; /* Some padding */
     border-radius: 5px; /* Rounded corners */
   }
+  .add-button {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+  }
