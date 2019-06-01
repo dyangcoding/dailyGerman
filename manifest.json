@@ -1,0 +1,32 @@
+{"dir" : "ltr",
+    "lang" : "de",
+    "name" : "Daily German",
+    "scope" : "/",
+    "display" : "browser",
+    "start_url" : "https://www.daily-german.com/",
+    "short_name" : "Daily German",
+    "theme_color" : "transparent",
+    "description" : "",
+    "orientation" : "any",
+    "background_color" : "transparent",
+    "related_applications" : "",
+    "prefer_related_applications" : "false",
+    "generated" : "true",
+    "icons" : [
+        {
+            "src": "https://www.daily-german.com/static/images/favicon-16x16.webp",
+            "sizes": "16x16"
+        },
+        {
+            "src": "https://www.daily-german.com/static/images/favicon-32x32.webp",
+            "sizes": "32x32"
+        },
+        {
+            "src": "https://www.daily-german.com/static/images/favicon-192x192.webp",
+            "sizes": "192x192"
+        },
+        {
+            "src": "https://www.daily-german.com/static/images/favicon-512x512.webp",
+            "sizes": "512x512"
+        }
+    ]}
