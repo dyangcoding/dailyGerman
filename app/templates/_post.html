@@ -4,22 +4,12 @@
 <p><span class="glyphicon glyphicon-time"></span>
     Daily German {{ moment(post.timestamp).format('LL') }}
 </p>
-{% if post.video_id %}
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item" src="{{ "https://player.vimeo.com/video/" ~ post.video_id }}" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-    </div>
-{% endif %}
 {% if post.img_path %}
 <hr>
     <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, height=400, mode='crop', quality=95)}}" alt="">
 {% endif %}
 <hr>
-{% if post.video_id %}
-    <p>{{ post.content | markdown | safe | truncate(200) }}</p>
-{% else %}
-    <p>{{ post.content | markdown | safe | truncate(300) }}</p>
-{% endif %}
-
+<p>{{ post.content | markdown | safe | truncate(300) }}</p>
 <a class="btn btn-primary" href="{{ url_for('main.showPost', post_id=post.id) }}">
     Mehr lesen <span class="glyphicon glyphicon-chevron-right"></span>
 </a>

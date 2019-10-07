@@ -6,14 +6,6 @@
   {{ share.load() }}
 {% endblock %}
 
-{% block scripts %}
-  <script src="/static/js/plyr.polyfilled.js"></script>
-  <script>
-    const player = new Plyr('#player');
-  </script>
-  {{super()}}
-{% endblock %}
-
 {% block app_content %}
 <div class="row">
     <div class="col-md-8 col-md-8 col-md-offset-2">
@@ -23,17 +15,6 @@
         <p><span class="glyphicon glyphicon-time"></span>
             Daily German {{ moment(post.timestamp).format('LL') }}
         </p>
-        {% if post.video_id %}
-        <div class="embed-responsive embed-responsive-16by9" id="player">
-            <iframe
-                class="embed-responsive-item"
-                src="{{ "https://player.vimeo.com/video/" ~ post.video_id ~ "?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media" }}"
-                allowfullscreen
-                allowtransparency
-                allow="autoplay"
-            ></iframe>
-        </div>
-        {% endif %}
         {% if post.img_path %}
         <hr>
             <img class="img-responsive" src="{{resized_img_src(post.img_path, width=900, height=500, mode='crop', quality=95)}}" alt="">
