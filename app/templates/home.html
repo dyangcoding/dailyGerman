@@ -24,56 +24,56 @@
               <div class="row">
                   <div class="col-md-10 col-md-offset-1">
                       <ul class="list-unstyled cat-list">
-                              <li>
-                                  <a href="{{url_for('main.home')}}">
-                                  <p>
-                                      <span>All</span>
-                                      <span class="pull-right">{% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.dailyGerman')}}">
-                                  <p>
-                                      <span>Daily German</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.working')}}">
-                                  <p>
-                                      <span>Working</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.interview')}}">
-                                  <p>
-                                      <span>Interview</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.film')}}">
-                                  <p>
-                                      <span>Film</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.song')}}">
-                                  <p>
-                                      <span>Song</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
-                              <li><a href="{{url_for('main.friends')}}">
-                                  <p>
-                                      <span>Friends</span>
-                                      <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})</span>
-                                  </p>
-                                  </a>
-                              </li>
+                        <li>
+                            <a href="{{url_for('main.home')}}">
+                            <p>
+                                <span>All</span>
+                                <span class="pull-right">{% if allPosts %} ({{allPosts|length}}) {% else %} 0 {% endif %}</span>
+                            </p>
+                            </a>
+                        </li>
+                        <li><a href="{{url_for('main.dailyGerman')}}">
+                            <p>
+                                <span>Daily German</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','DailyGerman') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li>
+                        <li><a href="{{url_for('main.working')}}">
+                            <p>
+                                <span>Working</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Working') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li>
+                        <li><a href="{{url_for('main.interview')}}">
+                            <p>
+                                <span>Interview</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Interview') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li>
+                        <li><a href="{{url_for('main.film')}}">
+                            <p>
+                                <span>Film</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Film') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li>
+                        <li><a href="{{url_for('main.song')}}">
+                            <p>
+                                <span>Song</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Song') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li>
+                        <!--li><a href="{{url_for('main.friends')}}">
+                            <p>
+                                <span>Friends</span>
+                                <span class="pull-right">({{ allPosts | selectattr('categorie', 'equalto','Friends') | list | length}})</span>
+                            </p>
+                            </a>
+                        </li-->
                       </ul>
                   </div>
               </div>

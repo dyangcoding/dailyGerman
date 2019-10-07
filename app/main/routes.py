@@ -19,7 +19,8 @@ def service_worker():
 @bp.route('/home')
 @cache.cached(300, key_prefix='all_posts')
 def home():
-    posts = Post.query.filter(Post.categorie != 'About').  \
+    posts = Post.query.filter(Post.categorie != 'About' \
+            and Post.categorie != 'Friends').  \
             order_by(Post.timestamp.desc()).all()
     current_app.logger.info('display all posts.')
     return render_template('home.html', posts=posts, allPosts=posts)
