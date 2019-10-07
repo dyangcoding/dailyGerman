@@ -6,26 +6,15 @@
 {% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-default nav-header">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('main.home') }}">Daily German</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{ url_for('main.home') }}">Home</a></li>
-                    <li><a href="{{ url_for('main.about') }}">About</a></li>
-                    <!--li><a href="{{ url_for('main.contact') }}">Contact</a></li-->
-                </ul>
-
-            </div>
-        </div>
+    <nav class="navbar-custom navbar-default">
+      <div class="container-fluid">
+        <ul class="nav nav-bar">
+          <li><a href="{{ url_for('main.home') }}">Home</a></li>
+          <li><span><img class="logo" src="{{ resized_img_src('images/favicon-32x32.webp', width=32, height=32) }}"/></span> </li>
+          <li><a href="{{ url_for('main.about') }}">About</a></li>
+          <!--li><a href="{{ url_for('main.contact') }}">Contact</a></li-->
+        </ul>
+       </div>
     </nav>
 {% endblock %}
 
