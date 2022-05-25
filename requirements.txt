@@ -12,6 +12,6 @@ Flask_Moment==0.6.0
 Flask_Admin==1.5.3
 Flask_WTF==0.14.2
 python-dotenv==0.10.1
-PyJWT==1.7.1
+PyJWT==2.4.0
 SQLAlchemy==1.2.15
 Werkzeug==0.14.1
